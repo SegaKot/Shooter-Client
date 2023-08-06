@@ -530,7 +530,7 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1001 &136046668198560843
+--- !u!1001 &993340299
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -541,12 +541,7 @@ PrefabInstance:
     - target: {fileID: 4864819018612502674, guid: 7eb0f6928e803b8478c55f08aa1be44b,
         type: 3}
       propertyPath: m_Name
-      value: Player_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4864819018612502674, guid: 7eb0f6928e803b8478c55f08aa1be44b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8427005949592833343, guid: 7eb0f6928e803b8478c55f08aa1be44b,
         type: 3}
