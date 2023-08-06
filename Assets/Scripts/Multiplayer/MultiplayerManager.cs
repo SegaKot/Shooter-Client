@@ -29,6 +29,13 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
         _room = await Instance.client.JoinOrCreate<State>("state_handler", data);
 
         _room.OnStateChange += OnChange;
+
+        _room.OnMessage<string>("Shoot", ApplyShoot);
+    }
+
+    private void ApplyShoot(string jsonShootInfo)
+    {
+
     }
 
     private void OnChange(State state, bool isFirstState)
@@ -52,6 +59,7 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
         Instantiate(_player, position, Quaternion.identity);
     }
 
+    private Dictionary<string, EnemyController> _enemies = new Dictionary<string, EnemyController>();
     private void CreateEnemy(string key, Player player)
     {
         var position = new Vector3(player.pX, player.pY, player.pZ);
@@ -77,4 +85,11 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
     {
         _room.Send(key, data);
     }
+
+    public void SendMessage(string key, string data)
+    {
+        _room.Send(key, data);
+    }
+
+    public string GetSessionID() => _room.SessionId;
 }
