@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerCharacter : Character
@@ -60,13 +61,15 @@ public class PlayerCharacter : Character
         _head.localEulerAngles = new Vector3(_currentRotateX, 0, 0);
     }
 
-    public void GetMoveInfo(out Vector3 position, out Vector3 velocity, out float rotateX, out float rotateY)
+    public void GetMoveInfo(out Vector3 position, out Vector3 velocity, out float rotateX, out float rotateY, out bool isSit)
     {
         position = transform.position;
         velocity = _rigidbody.velocity;
 
         rotateX = _head.localEulerAngles.x;
         rotateY = transform.eulerAngles.y;
+
+        isSit = base.isSit;
     }
 
     public void Jump()
@@ -76,5 +79,10 @@ public class PlayerCharacter : Character
 
         _jumpTime = Time.time;
         _rigidbody.AddForce(0, _jumpForce, 0, ForceMode.VelocityChange);
+    }
+
+    public void SitDown(bool value)
+    {
+        base.isSit = value;
     }
 }

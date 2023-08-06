@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyCharacter : Character
@@ -42,5 +43,10 @@ public class EnemyCharacter : Character
     public void SetRotateY(float value)
     {
         transform.localEulerAngles = new Vector3(0,value, 0);
+    }
+
+    public void SitDown(bool value)
+    {
+        base.isSit = value;
     }
 }

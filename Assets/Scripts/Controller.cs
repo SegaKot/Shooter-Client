@@ -23,12 +23,15 @@ public class Controller : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y");
 
         bool isShoot = Input.GetMouseButton(0);
-
         bool space = Input.GetKeyDown(KeyCode.Space);
+        bool sitButton = Input.GetKey(KeyCode.LeftControl);
 
         _player.SetInput(h, v, mouseX * _mouseSensetivity);
         _player.RotateX(-mouseY * _mouseSensetivity);
+
         if (space) _player.Jump();
+        if (sitButton) _player.SitDown(true);
+        else _player.SitDown(false);
 
         if (isShoot && _gun.TryShoot(out ShootInfo shootInfo)) SendShoot(ref shootInfo);
 
@@ -45,7 +48,7 @@ public class Controller : MonoBehaviour
 
     private void SendMove()
     {
-        _player.GetMoveInfo(out Vector3 position, out Vector3 velocity, out float rotateX, out float rotateY);
+        _player.GetMoveInfo(out Vector3 position, out Vector3 velocity, out float rotateX, out float rotateY, out bool isSit);
         Dictionary<string, object> data = new Dictionary<string, object>()
         {
             {"pX", position.x},
@@ -55,7 +58,8 @@ public class Controller : MonoBehaviour
             {"vY", velocity.y},
             {"vZ", velocity.z},
             {"rX", rotateX},
-            {"rY", rotateY}
+            {"rY", rotateY},
+            {"sit", isSit }
         };
         _multiplayerManager.SendMessage("move", data);
     }
