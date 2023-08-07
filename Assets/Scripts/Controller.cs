@@ -30,8 +30,7 @@ public class Controller : MonoBehaviour
         _player.RotateX(-mouseY * _mouseSensetivity);
 
         if (space) _player.Jump();
-        if (sitButton) _player.SitDown(true);
-        else _player.SitDown(false);
+        _player.SitDown(sitButton);
 
         if (isShoot && _gun.TryShoot(out ShootInfo shootInfo)) SendShoot(ref shootInfo);
 
